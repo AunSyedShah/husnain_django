@@ -3,4 +3,5 @@ from . import views
 
 urlpatterns = [
     path('', views.home),
+    path('calculator/<int:num1>/<int:num2>', views.calculator),
 ]
