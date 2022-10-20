@@ -6,9 +6,23 @@
 </head>
 <body>
 <h2>Student List</h2>
+<form method="post">
+    {% csrf_token %}
+    <label for="roll_no">Roll Number</label>
+    <input type="text" id="roll_no" name="roll_no" placeholder="Roll Number">
+    <label for="stud_name">Student Name</label>
+    <input type="text" id="stud_name" name="stud_name" placeholder="Student Name">
+    <label for="father_name">Father Name</label>
+    <input type="text" id="father_name" name="father_name" placeholder="Father Name">
+    <label for="stud_class">Class</label>
+    <input type="text" id="stud_class" name="stud_class" placeholder="Class">
+    <input type="submit" value="Add Student" name="add_student">
+    <input type="submit" value="Delete Student" name="delete_student">
+</form>
 <ul>
     {% for student in students %}
-        <li>{{ student.student_name }} - {{ student.father_name }} - {{ student.stud_class }}</li>
+        <li>{{ student.roll_no }} - {{ student.student_name }} - {{ student.father_name }}
+            - {{ student.stud_class }}</li>
     {% endfor %}
 </ul>
 </body>
