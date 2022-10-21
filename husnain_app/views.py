@@ -1,6 +1,6 @@
 from django.shortcuts import render
+
 from .models import Student
-from django.http import JsonResponse
 
 
 # Create your views here.
@@ -15,7 +15,10 @@ def home(request):
                                    stud_class=stud_class)
         if "delete_student" in request.POST:
             roll_no = request.POST.get('roll_no')
-            Student.objects.filter(roll_no=roll_no).delete()
+            try:
+                Student.objects.get(roll_no=roll_no).delete()
+            except:
+                pass
     students = Student.objects.all()
     context = {
         'students': students
