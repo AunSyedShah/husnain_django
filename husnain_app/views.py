@@ -19,6 +19,19 @@ def home(request):
                 Student.objects.get(roll_no=roll_no).delete()
             except:
                 pass
+        if "update_student" in request.POST:
+            roll_no = request.POST.get('roll_no')
+            stud_name = request.POST.get('stud_name')
+            father_name = request.POST.get('father_name')
+            stud_class = request.POST.get('stud_class')
+            try:
+                student_old = Student.objects.get(roll_no=roll_no)
+                student_old.student_name = stud_name
+                student_old.father_name = father_name
+                student_old.stud_class = stud_class
+                student_old.save()
+            except:
+                pass
     students = Student.objects.all()
     context = {
         'students': students
