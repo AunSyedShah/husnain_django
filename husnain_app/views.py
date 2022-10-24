@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponse
 
 from .models import Student
 
@@ -20,7 +21,12 @@ def sgn_in(request):
         user = authenticate(request, username=username, password=pwd)
         if user is not None:
             login(request, user)
-            return redirect("index")
+            return HttpResponse("<h1>Login Successful</h1>")
         else:
-            return redirect(request.path)
+            return HttpResponse("<h1>Login Failed</h1>")
     return render(request, "login_page.html")
+
+
+def user_logout(request):
+    logout(request)
+    return redirect('signin')
