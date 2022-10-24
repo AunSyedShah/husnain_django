@@ -21,7 +21,7 @@ def sgn_in(request):
         user = authenticate(request, username=username, password=pwd)
         if user is not None:
             login(request, user)
-            return HttpResponse("<h1>Login Successful</h1>")
+            return HttpResponse(f"<h1>Welcome, {user.first_name} {user.last_name}</h1>")
         else:
             return HttpResponse("<h1>Login Failed</h1>")
     return render(request, "login_page.html")
