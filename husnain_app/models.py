@@ -7,3 +7,6 @@ class Student(models.Model):
     student_name = models.CharField(max_length=30, default="")
     father_name = models.CharField(max_length=30, default="")
     stud_class = models.IntegerField(default=0)
+
+
+

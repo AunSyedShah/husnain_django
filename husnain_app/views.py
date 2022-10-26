@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
+from django.contrib.auth.models import User
 
 from .models import Student
 
@@ -30,3 +31,17 @@ def sgn_in(request):
 def user_logout(request):
     logout(request)
     return redirect('signin')
+
+
+def registration(request):
+    if request.method == "POST":
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        pwd = request.POST.get('pwd')
+        User.objects.create_user(first_name=first_name, last_name=last_name, username=username, email=email,
+                                 password=pwd)
+        # return to login page
+        return redirect('signin')
+    return render(request, 'registration.html')
