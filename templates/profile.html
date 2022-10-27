@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block title %}Profile{% endblock %}
+{% block main_content %}
+    <h1>Welcome {{ request.user.get_full_name }}</h1>
+{% endblock %}

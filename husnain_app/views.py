@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
 
 from .models import Student
@@ -22,7 +22,7 @@ def sgn_in(request):
         user = authenticate(request, username=username, password=pwd)
         if user is not None:
             login(request, user)
-            return HttpResponse(f"<h1>Welcome, {user.first_name} {user.last_name}</h1>")
+            return redirect("profile")
         else:
             return HttpResponse("<h1>Login Failed</h1>")
     return render(request, "login_page.html")
@@ -45,3 +45,14 @@ def registration(request):
         # return to login page
         return redirect('signin')
     return render(request, 'registration.html')
+
+
+def sample_json_response(request):
+    data = {
+        "message": "This is An API Call, Hello Next JS, From Django"
+    }
+    return JsonResponse(data)
+
+
+def profile(request):
+    return render(request, 'profile.html')
