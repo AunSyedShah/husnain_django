@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
 
-from .models import Student
+from .models import Student, Teacher
 
 
 # Create your views here.

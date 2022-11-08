@@ -1,10 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'covid_app/base.html' %}
+{% block main_content %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">CNIC Number</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                   name="cnic_number" required>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">CNIC Issue Date</label>
+            <input type="date" class="form-control" id="exampleInputPassword1">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    {% if profile %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">CNIC</th>
+                <th scope="col">Vaccine</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>{{ profile.name }}</th>
+                <td>{{ profile.cnic_number }}</td>
+                <td>{{ profile.vaccine }}</td>
+            </tr>
+            </tbody>
+        </table>
+    {% else %}
+        {% if request.method == "POST" %}
+            <div class="alert alert-danger" role="alert">
+                No Record Found
+            </div>
+        {% endif %}
+    {% endif %}
+{% endblock %}
